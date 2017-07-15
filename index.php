@@ -1,10 +1,11 @@
 <?php
-	include("class/class-cursor.php");
 	include("class/class-nodo.php");
+	include("class/class-cursor.php");
+	include("class/class-lista.php");
 	include("class/class-proceso.php");
 
-	$probarMemoria = new Cursor();
-	$probarMemoria->memoria();
+	$probarMemoria = new Lista();
+	$probarMemoria->getContenedor()->memoria();
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,43 +14,43 @@
 </head>
 <body>
 <?php
-	$probarMemoria->memoria();
+	/*$probarMemoria->memoria();
 	$boo = false;
 	if ($boo) {
 		echo "# code...";
 	}
-	echo '<br>'.'H: '.$boo . '<br>';
-		$probarMemoria->INSERTA("Juana", $probarMemoria->PRIMERO());
-		$probarMemoria->INSERTA("Pedro", $probarMemoria->ANTERIOR($probarMemoria->FIN()));
-		$probarMemoria->INSERTA("Maria", $probarMemoria->PRIMERO());
-		$probarMemoria->INSERTA("Sara", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
+	echo '<br>'.'H: '.$boo . '<br>';*/
+		$probarMemoria->INSERTA("1050", $probarMemoria->PRIMERO());
+		$probarMemoria->INSERTA("1072", $probarMemoria->ANTERIOR($probarMemoria->FIN()));
+		$probarMemoria->INSERTA("1144", $probarMemoria->PRIMERO());
+		$probarMemoria->INSERTA("1378", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
 		echo '<br>'."Vacia? " . $probarMemoria->VACIA(). " FIN:".$probarMemoria->FIN().'<br>';
-		$probarMemoria->INSERTA("Karina", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
-		$probarMemoria->imprimeLista();
-		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("Sara").'<br>';
-		$probarMemoria->imprimeLista();
+		$probarMemoria->INSERTA("1391", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
+		$probarMemoria->getContenedor()->imprimeLista();
+		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("1378").'<br>';
+		$probarMemoria->getContenedor()->imprimeLista();
 		echo '<br>'."Vacia? " . $probarMemoria->VACIA(). " FIN:".$probarMemoria->FIN();
 		$probarMemoria->ANULA();
-		$probarMemoria->INSERTA("Juana", $probarMemoria->PRIMERO());
-		$probarMemoria->INSERTA("Pedro", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
-		$probarMemoria->INSERTA("Maria", $probarMemoria->PRIMERO());
-		$probarMemoria->INSERTA("Sara", $probarMemoria->ANTERIOR($probarMemoria->FIN()));
-		$probarMemoria->imprimeLista();
+		$probarMemoria->INSERTA("1050", $probarMemoria->PRIMERO());
+		$probarMemoria->INSERTA("1072", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
+		$probarMemoria->INSERTA("1144", $probarMemoria->PRIMERO());
+		$probarMemoria->INSERTA("1378", $probarMemoria->ANTERIOR($probarMemoria->FIN()));
+		$probarMemoria->getContenedor()->imprimeLista();
 		echo '<br>'."Vacia? " . $probarMemoria->VACIA(). " FIN:".$probarMemoria->FIN();
 		//$probarMemoria->ANULA();
-		$probarMemoria->INSERTA("Karina", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
-		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("Sara").'<br>';
-		$probarMemoria->imprimeLista();
+		$probarMemoria->INSERTA("1391", $probarMemoria->SIGUIENTE($probarMemoria->PRIMERO()));
+		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("1378").'<br>';
+		$probarMemoria->getContenedor()->imprimeLista();
 		echo '<br>'."Vacia? " . $probarMemoria->VACIA(). " FIN:".$probarMemoria->FIN();
 		echo '<br>'."Recupera " . $probarMemoria->RECUPERA($probarMemoria->ANTERIOR($probarMemoria->FIN()));
-		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("Pedro").'<br>';
+		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("1072").'<br>';
 		echo '<br>'."<<<<";
-		$probarMemoria->imprimeLista();
+		$probarMemoria->getContenedor()->imprimeLista();
 		$probarMemoria->SUPRIME($probarMemoria->FIN());
 		echo '<br>'."<<<<";
-		$probarMemoria->imprimeLista();
+		$probarMemoria->getContenedor()->imprimeLista();
 		echo '<br>'."Vacia? " . $probarMemoria->VACIA(). " FIN:".$probarMemoria->FIN();
-		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("Sara")."\n".'<br>';
+		echo '<br>'."Vacia? " . $probarMemoria->PRIMERO(). " Localiza:".$probarMemoria->LOCALIZA("1378")."\n".'<br>';
 ?>
 </body>
 </html>

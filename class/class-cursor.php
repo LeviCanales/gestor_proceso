@@ -34,7 +34,7 @@
 			$in = $this->cabeza;
 			$cont = -1;
 			for($k = 0; $k < 10; $k++){
-				echo "Local " . ($k+1) . " ".$this->arreglo[$in]->getDato() . "<br>";
+				//echo "Local " . ($k+1) . " ".$this->arreglo[$in]->getDato() . "<br>";
 				if($this->arreglo[$in]->getEncadenamiento()==-1){
 					if($this->arreglo[$in]->getDato()!=$x){
 						break;
