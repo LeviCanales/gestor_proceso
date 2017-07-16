@@ -1,7 +1,7 @@
 <?php
 	class Cursor {
 		private $cabeza;
-
+		private $MAX = 20;
 		private $arreglo = array();
 		private $memoria = array();
 
@@ -14,16 +14,16 @@
 		private $suprOK;
 
 		public function __construct(){
-			for ($i=0; $i < 10; $i++) { 
+			for ($i=0; $i < $this->MAX; $i++) { 
 				$this->memoria[$i] = false;
 			}
-			for ($i=0; $i < 10; $i++) { 
+			for ($i=0; $i < $this->MAX; $i++) { 
 				$this->arreglo[$i] = new NODO(null,null);
 			}
 		}
 
 		function memoria(){
-			for ($i=0; $i < 10; $i++) { 
+			for ($i=0; $i < $this->MAX; $i++) { 
 				echo "hola: " . $this->memoria[$i] . '<br>';
 				//$this->arreglo[4]->setEncadenamiento(5);
 				echo $i . ": " . $this->arreglo[$i] . '<br>';
@@ -33,7 +33,7 @@
 		function LOCALIZA($x){
 			$in = $this->cabeza;
 			$cont = -1;
-			for($k = 0; $k < 10; $k++){
+			for($k = 0; $k < $this->MAX; $k++){
 				//echo "Local " . ($k+1) . " ".$this->arreglo[$in]->getDato() . "<br>";
 				if($this->arreglo[$in]->getEncadenamiento()==-1){
 					if($this->arreglo[$in]->getDato()!=$x){
@@ -71,7 +71,7 @@
 					$this->cabeza = $this->index;
 				}else if($p==$this->FIN()){
 					$in = 0;
-					for($k = 0; $k < 10; $k++){
+					for($k = 0; $k < $this->MAX; $k++){
 						if($this->arreglo[$k]->getEncadenamiento()==-1){
 							$in = $k;
 							break;
@@ -149,7 +149,7 @@
 			$this->cabeza = -1;
 			$this->numElementos = 0;
 			$this->empty = true;
-			for($k = 0; $k < 10; $k++){
+			for($k = 0; $k < $this->MAX; $k++){
 				$this->memoria[$k] = false;
 				$this->arreglo[$k]->setDato(null);
 			}
@@ -157,7 +157,7 @@
 		}
 		
 		function VACIA(){
-			for($k = 0; $k < 10; $k++){
+			for($k = 0; $k < $this->MAX; $k++){
 				if($this->memoria[$k]==true){
 					$this->empty = false;
 					break;
@@ -183,7 +183,7 @@
 
 		function FIN(){
 			$this->numElementos = 0;
-			for($i = 0; $i<10;$i++){
+			for($i = 0; $i<$this->MAX;$i++){
 				if($this->memoria[$i]!=false){
 					$this->numElementos++;
 				}
@@ -194,7 +194,7 @@
 		//Verdaderos metodos de apoyo
 		function indexActual(){
 			$this->indice = -1;
-			for($k = 0; $k < 10; $k++){
+			for($k = 0; $k < $this->MAX; $k++){
 				if($this->memoria[$k]==false){
 					$this->indice = $k;
 					break;
@@ -206,7 +206,7 @@
 		function imprimeLista(){
 			$in = $this->cabeza;
 			if(!$this->VACIA()){
-				for($k = 0; $k < 10; $k++){
+				for($k = 0; $k < $this->MAX; $k++){
 					echo ($k+1).": ".$this->arreglo[$in]->getDato().'<br>';
 					if($this->arreglo[$in]->getEncadenamiento()==-1){
 						echo "<br>fin<br>";
