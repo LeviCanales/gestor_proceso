@@ -1,7 +1,7 @@
 var $grid = $('.grid').imagesLoaded( function() {
   // init Masonry after all images have loaded
   $grid.masonry({
-    columnWidth: 30
+    columnWidth: 10
   });
 });
 $grid.on( 'click', '.grid-item', function() {

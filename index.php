@@ -18,8 +18,12 @@
 		    src: url(fonts/Children-of-the-Starlight.ttf);
 		  }
 		@font-face{
-		    font-family: 'Aristotle-Punk';
+		    font-family: 'Hanged-Letters';
 		    src: url(fonts/Hanged-Letters.ttf);
+		  }
+		@font-face{
+		    font-family: 'Basscrw';
+		    src: url(fonts/Basscrw.ttf);
 		  }
 	</style>
 	<link rel="icon" href="img/icon.png">
@@ -47,13 +51,19 @@
 			echo '<div class="grid-item cuadro-transparente">';
 			echo $i.': '.$raw[$i].'<br>';
 			$dato = explode("/", $raw[$i]);
-			for ($j=0; $j < sizeof($dato); $j++) {
-				echo "* ".$j.': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| son 6?: '.((sizeof($dato)==6)?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
-				if(!(sizeof($dato)==6)){
-					echo "Cantidad de Datos: ".sizeof($dato).' ';
+			for ($k=0; $k < sizeof($proceso); $k++) { 
+				if (trim($dato[0])==($proceso[$k])->getId_proceso()) {
+					echo "ID Repetido: ". trim($dato[0]).' ';
 					$guardar = false;
 					break;
 				}
+			}
+			if (!(sizeof($dato)==6)) {
+				echo "Cantidad de Datos: ".sizeof($dato).' ';
+				$guardar = false;
+			}
+			for ($j=0; ($j < sizeof($dato))&&$guardar; $j++) {
+				echo "* ".$j.': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
 				if(!(is_numeric($dato[$j]))){
 					echo "Tipo de Datos: ". gettype($dato[$j]).' ';
 					$guardar = false;
@@ -104,7 +114,7 @@
 			//echo (($guardar)?'<span class="highlightn">Proceso Adecuado</span>':'Proceso Fallido');
 			echo "</div><br>";
 		}
-		echo "</div><div class='cuadro-transparente'>Procesos:";
+		echo "</div><div class='cuadro-transparente espacio'><div class='titulillo'>Procesos:</div>";
 		for ($i=0; $i < sizeof($proceso); $i++) { 
 			echo "<br>".$i.': '.$proceso[$i];
 		}

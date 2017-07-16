@@ -14,6 +14,7 @@ h1{
     border-style: solid;
     padding: 20px;
     margin-top: 25px;
+    margin-left: 20px;
     font-family:'Arual', sans-serif;
     font-weight: bold;
   }
@@ -32,6 +33,16 @@ h1{
   }
   .gigante {
     font-size: 40px;
-    font-family:'Aristotle-Punk', fantasy;
+    font-family:'Hanged-Letters', fantasy;
     font-weight: lighter;
+}
+.titulillo{
+  text-align: center;
+  font-family: 'Basscrw',fantasy;
+  font-size: 80px;
+  font-weight: lighter;
+}
+.espacio{
+  padding: 40px;
+  margin: 40px;
 }
