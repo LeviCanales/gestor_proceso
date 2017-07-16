@@ -49,7 +49,7 @@
 		for ($i=0; $i < sizeof($raw); $i++) {
 			$guardar = true;
 			echo '<div class="grid-item cuadro-transparente">';
-			echo $i.': '.$raw[$i].'<br>';
+			echo ($i+1).': '.$raw[$i].'<br>';
 			$dato = explode("/", $raw[$i]);
 			for ($k=0; $k < sizeof($proceso); $k++) { 
 				if (trim($dato[0])==($proceso[$k])->getId_proceso()) {
@@ -63,7 +63,7 @@
 				$guardar = false;
 			}
 			for ($j=0; ($j < sizeof($dato))&&$guardar; $j++) {
-				echo "* ".$j.': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
+				echo "* ".($j+1).': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
 				if(!(is_numeric($dato[$j]))){
 					echo "Tipo de Datos: ". gettype($dato[$j]).' ';
 					$guardar = false;
@@ -114,11 +114,11 @@
 			//echo (($guardar)?'<span class="highlightn">Proceso Adecuado</span>':'Proceso Fallido');
 			echo "</div><br>";
 		}
-		echo "</div><div class='cuadro-transparente espacio'><div class='titulillo'>Procesos:</div>";
+		echo "</div><div class='cuadro-transparente espacio'><div class='titulillo'>Procesos Aceptados ".sizeof($proceso)."</div><div class='row'>";
 		for ($i=0; $i < sizeof($proceso); $i++) { 
-			echo "<br>".$i.': '.$proceso[$i];
+			echo "<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3' id='borde'><div class='letra' style='font-size: 80px; text-align:center; font-family: 'Basscrw',fantasy;'>".($i+1).':</div>'.$proceso[$i].'</div>';
 		}
-		echo "</div>";
+		echo "</div></div>";
 		fclose($archivo);
 	}else{
 		echo "No se encontro proceso.";

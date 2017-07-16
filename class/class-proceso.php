@@ -59,12 +59,12 @@
 			$this->evento = $evento;
 		}
 		public function __toString(){
-			return "Id_proceso: " . $this->id_proceso . 
-				" Estado: " . $this->estado . 
-				" Prioridad: " . $this->prioridad . 
-				" Cantidad_instruccion: " . $this->cantidad_instruccion . 
-				" Intruccion_bloqueo: " . $this->intruccion_bloqueo . 
-				" Evento: " . $this->evento;
+			return 'Id del proceso: ' . $this->id_proceso . '<br>'.
+				" Estado del proceso: " . $this->estado . '<br>'.
+				" Prioridad: " . $this->prioridad . '<br>'.
+				" Cantidad de instrucciones: " . $this->cantidad_instruccion . '<br>'.
+				" Intruccion de bloqueo: " . $this->intruccion_bloqueo . '<br>'.
+				" Evento: " . $this->evento . '<br><br>';
 		}
 	}
 ?>
