@@ -28,7 +28,7 @@
 			echo $i.': '.$proceso[$i].'<br>';
 			$dato = explode("/", $proceso[$i]);
 			for ($j=0; $j < sizeof($dato); $j++) { 
-				echo ". ".$j.': '.$dato[$j].'<br>';
+				echo "* ".$j.': '.$dato[$j].' is_numeric(): '.((is_numeric($dato[$j]))?'True':'False').'<br>';
 			}
 			echo "<br>";
 		}
