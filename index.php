@@ -10,12 +10,16 @@
 <head>
 	<style>
 		@font-face{
-		    font-family: 'Orbitron';
+		    font-family: 'Arual';
 		    src: url(fonts/Arual.ttf);
 		  }
-		  @font-face{
-		    font-family: 'Monoton';
+		@font-face{
+		    font-family: 'Children-of-the-Starlight';
 		    src: url(fonts/Children-of-the-Starlight.ttf);
+		  }
+		@font-face{
+		    font-family: 'Aristotle-Punk';
+		    src: url(fonts/Hanged-Letters.ttf);
 		  }
 	</style>
 	<link rel="icon" href="img/icon.png">
@@ -23,8 +27,8 @@
 	<link href="css/disenio-gestor.css" rel="stylesheet">
 	<title>Simulador Procesos</title>
 </head>
-<body style="color:#ffffff;background-image: url(img/thumb-1920-593483.jpg);background-size: cover;background-attachment: fixed; font-size: 20px; font-weight: 900">
-<h1 style="font-family: 'Monoton', cursive;">Simulador de Procesos
+<body style="color:#ffffff;background-image: url(img/thumb-1920-593483.jpg);background-size: cover;background-attachment: fixed; font-size: 20px;">
+<h1 style="font-family: 'Children-of-the-Starlight', cursive;">Simulador de Procesos
 <?php
 	$direccion = "data/procesos.txt";
 	if(file_exists($direccion)){
@@ -43,8 +47,8 @@
 			echo '<div class="grid-item cuadro-transparente">';
 			echo $i.': '.$raw[$i].'<br>';
 			$dato = explode("/", $raw[$i]);
-			for ($j=0; $j < sizeof($dato); $j++) { 
-				echo "* ".$j.': '.$dato[$j].' is_numeric(): '.((is_numeric($dato[$j]))?'True':'False').' son 6?: '.((sizeof($dato)==6)?'True':'False').' Tamanio: '.strlen(trim($dato[$j])).'<br>';
+			for ($j=0; $j < sizeof($dato); $j++) {
+				echo "* ".$j.': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| son 6?: '.((sizeof($dato)==6)?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
 				if(!(sizeof($dato)==6)){
 					echo "Cantidad de Datos: ".sizeof($dato).' ';
 					$guardar = false;
@@ -91,8 +95,18 @@
 					break;
 				}
 			}
-			echo (($guardar)?'Proceso Adecuado':'Proceso Fallido');
+			if ($guardar) {
+				echo '<span class="highlightn">Proceso Adecuado ID: '.trim($dato[0]).'</span>';
+				$proceso[] = new Proceso(trim($dato[0]),trim($dato[1]),trim($dato[2]),trim($dato[3]),trim($dato[4]),trim($dato[5]));
+			}else{
+				echo 'Proceso Fallido';
+			}
+			//echo (($guardar)?'<span class="highlightn">Proceso Adecuado</span>':'Proceso Fallido');
 			echo "</div><br>";
+		}
+		echo "</div><div class='cuadro-transparente'>Procesos:";
+		for ($i=0; $i < sizeof($proceso); $i++) { 
+			echo "<br>".$i.': '.$proceso[$i];
 		}
 		echo "</div>";
 		fclose($archivo);
@@ -102,7 +116,6 @@
 ?>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.highlight-5.js"></script>
-<script src="js/jquery.highlightn-5.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>

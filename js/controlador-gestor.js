@@ -11,4 +11,3 @@ $grid.on( 'click', '.grid-item', function() {
 });
 $('.grid').highlight('False');
 $('.grid').highlight('Proceso Fallido');
-$('.grid').highlightn('Proceso Adecuado');
