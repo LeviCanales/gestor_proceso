@@ -18,7 +18,15 @@
         margin: 20px;
         font-family:'Orbitron', sans-serif;
       }
-      .highlight { color: black; background-color: red; padding-left: 20px; padding-right: 20px;}
+      .highlight {
+      	color: black;
+      	background-color:red;
+      	padding-left:
+      	20px; padding-right: 20px;
+      }
+      .gigante {
+        font-size: 40px;
+		}
 	</style>
 	<title>Simulador Procesos</title>
 </head>
@@ -63,10 +71,9 @@ var $grid = $('.grid').imagesLoaded( function() {
   });
 });
 $grid.on( 'click', '.grid-item', function() {
-  // remove clicked element
-  $grid.masonry( 'remove', this )
-    // layout remaining item elements
-    .masonry('layout');
+  $(this).toggleClass('gigante');
+  // trigger layout after item size changes
+  $grid.masonry('layout');
 });
 $('.grid').highlight('False');
 </script>
