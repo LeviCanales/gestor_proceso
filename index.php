@@ -11,7 +11,7 @@
 	<style>
 		@font-face{
 		    font-family: 'Orbitron';
-		    src: url(fonts/Orbitron-Regular.ttf);
+		    src: url(fonts/Arual.ttf);
 		  }
 		  @font-face{
 		    font-family: 'Monoton';
@@ -22,7 +22,7 @@
 	<link href="css/disenio-gestor.css" rel="stylesheet">
 	<title>Simulador Procesos</title>
 </head>
-<body style="color:#ffffff;background-image: url(img/thumb-1920-593483.jpg);background-size: cover;background-attachment: fixed; font-size: 20px">
+<body style="color:#ffffff;background-image: url(img/thumb-1920-593483.jpg);background-size: cover;background-attachment: fixed; font-size: 20px; font-weight: 900">
 <h1 style="font-family: 'Monoton', cursive;">Simulador de Procesos
 <?php
 	$direccion = "data/procesos.txt";
@@ -43,8 +43,44 @@
 			echo $i.': '.$raw[$i].'<br>';
 			$dato = explode("/", $raw[$i]);
 			for ($j=0; $j < sizeof($dato); $j++) { 
-				echo "* ".$j.': '.$dato[$j].' is_numeric(): '.((is_numeric($dato[$j]))?'True':'False').' son 6?: '.((sizeof($dato)==6)?'True':'False').'<br>';
-				if(!(is_numeric($dato[$j]))||!(sizeof($dato)==6)){
+				echo "* ".$j.': '.$dato[$j].' is_numeric(): '.((is_numeric($dato[$j]))?'True':'False').' son 6?: '.((sizeof($dato)==6)?'True':'False').' Tamanio: '.strlen(trim($dato[$j])).'<br>';
+				if(!(sizeof($dato)==6)){
+					echo "Cantidad de Datos: ".sizeof($dato).' ';
+					$guardar = false;
+					break;
+				}
+				if(!(is_numeric($dato[$j]))){
+					echo "Tipo de Datos: ". gettype($dato[$j]).' ';
+					$guardar = false;
+					break;
+				}
+				if(($j==0)&&!(strlen(trim($dato[$j]))==4)){
+					echo "Tamaño Id ";
+					$guardar = false;
+					break;
+				}
+				if(($j==1)&&!(strlen(trim($dato[$j]))==1)){
+					echo "Tamaño Estado ";
+					$guardar = false;
+					break;
+				}
+				if((($j==2)&&!(strlen(trim($dato[$j]))==1))||(($j==2)&&(!((integer)trim($dato[$j])<=3)||!((integer)trim($dato[$j])>=1)))){
+					echo "Tamaño Prioridad: ".strlen(trim($dato[$j])).'<br>La Prioridad: '.trim($dato[$j]).' ';
+					$guardar = false;
+					break;
+				}
+				if(($j==3)&&!(strlen(trim($dato[$j]))==3)){
+					echo "Tamaño Instrucciones ";
+					$guardar = false;
+					break;
+				}
+				if(($j==4)&&!(strlen(trim($dato[$j]))==3)){
+					echo "Tamaño Bloqueo: ".strlen(trim($dato[$j])).' ';
+					$guardar = false;
+					break;
+				}
+				if(($j==5)&&!(strlen(trim($dato[$j]))==1)){
+					echo "Tamaño Evento ";
 					$guardar = false;
 					break;
 				}
