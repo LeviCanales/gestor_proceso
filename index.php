@@ -15,8 +15,19 @@
 <?php
 	$direccion = "data/procesos.txt";
 	if(file_exists($direccion)){
+		$proceso = array();
 		$archivo =  fopen($direccion, "r") or die("No se pudo abrir");
-		echo fread($archivo, filesize($direccion));
+		$todos = fread($archivo, filesize($direccion));
+		echo $todos;
+		/*$txt = fopen("data/TXT.txt", "w");
+		fwrite($txt, $todos);
+		fclose($txt);*/
+		$proceso = explode(";", $todos, -1);
+		echo '<br><span style="background-color:rgba(255,0,50,0.6);">';
+		for ($i=0; $i < sizeof($proceso); $i++) { 
+			echo $i.': '.$proceso[$i].'<br>';
+		}
+		echo "</span>";
 		fclose($archivo);
 	}else{
 		echo "No se encontro proceso.";
