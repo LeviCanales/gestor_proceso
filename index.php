@@ -18,6 +18,7 @@
 		    src: url(fonts/Children-of-the-Starlight.ttf);
 		  }
 	</style>
+	<link rel="icon" href="img/icon.png">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/disenio-gestor.css" rel="stylesheet">
 	<title>Simulador Procesos</title>
@@ -60,17 +61,22 @@
 					break;
 				}
 				if(($j==1)&&!(strlen(trim($dato[$j]))==1)){
-					echo "Tamaño Estado ";
+					echo "Tamaño Estado: ".strlen(trim($dato[$j])).' ';
 					$guardar = false;
 					break;
 				}
-				if((($j==2)&&!(strlen(trim($dato[$j]))==1))||(($j==2)&&(!((integer)trim($dato[$j])<=3)||!((integer)trim($dato[$j])>=1)))){
-					echo "Tamaño Prioridad: ".strlen(trim($dato[$j])).'<br>La Prioridad: '.trim($dato[$j]).' ';
+				if(($j==2)&&!(strlen(trim($dato[$j]))==1)){
+					echo "Tamaño Prioridad: ".strlen(trim($dato[$j])).' ';
+					$guardar = false;
+					break;
+				}
+				if(($j==2)&&(!((integer)trim($dato[$j])<=3)||!((integer)trim($dato[$j])>=1))){
+					echo 'La Prioridad es: '.trim($dato[$j]).' ';
 					$guardar = false;
 					break;
 				}
 				if(($j==3)&&!(strlen(trim($dato[$j]))==3)){
-					echo "Tamaño Instrucciones ";
+					echo "Tamaño Instrucciones ".strlen(trim($dato[$j])).' ';
 					$guardar = false;
 					break;
 				}
@@ -96,6 +102,7 @@
 ?>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.highlight-5.js"></script>
+<script src="js/jquery.highlightn-5.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>

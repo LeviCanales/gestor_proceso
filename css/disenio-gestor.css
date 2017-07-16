@@ -23,6 +23,13 @@ h1{
   	20px;
   	padding-right: 20px;
   }
+  .highlightn {
+    color: black;
+    background-color:rgb(46, 178, 46);
+    padding-left:
+    20px;
+    padding-right: 20px;
+  }
   .gigante {
     font-size: 40px;
 }
