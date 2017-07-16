@@ -62,6 +62,10 @@
 				echo "Cantidad de Datos: ".sizeof($dato).' ';
 				$guardar = false;
 			}
+			if (((integer)trim($dato[4]))>(((integer)trim($dato[3]))-13)) {
+				echo "Bloqueo ".trim($dato[4]).'<br>difiere en mas de 13:<br>que Instrucciones: '.trim($dato[3]).' ';
+				$guardar = false;
+			}
 			for ($j=0; ($j < sizeof($dato))&&$guardar; $j++) {
 				echo "* ".($j+1).': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
 				if(!(is_numeric($dato[$j]))){

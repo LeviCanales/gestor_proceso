@@ -5,7 +5,7 @@ h1{
         padding: 40px;
         margin: 40px;
         /*border: 1px; border-color: #ffffff; border-style: solid;*/
-        border:20px white dashed;
+        border:5px white outset;
         font-size: 90px;
       }
 .cuadro-transparente{
