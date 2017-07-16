@@ -15,14 +15,15 @@
         border: 1px; border-color: #ffffff;
         border-style: solid;
         padding: 20px;
-        margin: 20px;
+        margin-top: 40px;
         font-family:'Orbitron', sans-serif;
       }
       .highlight {
       	color: black;
       	background-color:red;
       	padding-left:
-      	20px; padding-right: 20px;
+      	20px;
+      	padding-right: 20px;
       }
       .gigante {
         font-size: 40px;
@@ -34,22 +35,29 @@
 <?php
 	$direccion = "data/procesos.txt";
 	if(file_exists($direccion)){
-		$proceso = array();
+		$raw = array();
 		$archivo =  fopen($direccion, "r") or die("No se pudo abrir");
 		$todos = fread($archivo, filesize($direccion));
+		$proceso = array();
 		//echo $todos.'<br>';
 		/*$txt = fopen("data/TXT.txt", "w");
 		fwrite($txt, $todos);
 		fclose($txt);*/
-		$proceso = explode(";", $todos, -1);
+		$raw = explode(";", $todos, -1);
 		echo "<div class='grid'>";
-		for ($i=0; $i < sizeof($proceso); $i++) {
+		for ($i=0; $i < sizeof($raw); $i++) {
+			$guardar = true;
 			echo '<div class="grid-item cuadro-transparente">';
-			echo $i.': '.$proceso[$i].'<br>';
-			$dato = explode("/", $proceso[$i]);
+			echo $i.': '.$raw[$i].'<br>';
+			$dato = explode("/", $raw[$i]);
 			for ($j=0; $j < sizeof($dato); $j++) { 
 				echo "* ".$j.': '.$dato[$j].' is_numeric(): '.((is_numeric($dato[$j]))?'True':'False').' son 6?: '.((sizeof($dato)==6)?'True':'False').'<br>';
+				if(!(is_numeric($dato[$j]))||!(sizeof($dato)==6)){
+					$guardar = false;
+					break;
+				}
 			}
+			echo (($guardar)?'Proceso Adecuado':'Proceso Fallido');
 			echo "</div><br>";
 		}
 		echo "</div>";
@@ -76,6 +84,7 @@ $grid.on( 'click', '.grid-item', function() {
   $grid.masonry('layout');
 });
 $('.grid').highlight('False');
+$('.grid').highlight('Proceso Fallido');
 </script>
 </body>
 </html>
