@@ -129,6 +129,7 @@
 		}
 		echo "</div></div>";
 		fclose($archivo);
+		unlink('data/procesos.txt');
 	}else{
 		echo "</h1><div class='cuadro-transparente espacio'>No se encontro proceso.";
 		?>
