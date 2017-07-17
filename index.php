@@ -62,8 +62,8 @@
 				echo "Cantidad de Datos: ".sizeof($dato).' ';
 				$guardar = false;
 			}
-			if (((integer)trim($dato[4]))>(((integer)trim($dato[3]))-13)) {
-				echo "Bloqueo ".trim($dato[4]).'<br>difiere en mas de 13:<br>que Instrucciones: '.trim($dato[3]).' ';
+			if ((((integer)trim($dato[4]))>=((integer)trim($dato[3])))&&$guardar) {
+				echo "Instrucciones ".trim($dato[3]).'<br>no alcanzan a<br>Bloqueo: '.trim($dato[4]).' ';
 				$guardar = false;
 			}
 			for ($j=0; ($j < sizeof($dato))&&$guardar; $j++) {
@@ -105,6 +105,11 @@
 				}
 				if(($j==5)&&!(strlen(trim($dato[$j]))==1)){
 					echo "Tamaño Evento ";
+					$guardar = false;
+					break;
+				}
+				if(($j==5)&&!((trim($dato[$j])==5)||(trim($dato[$j])==3))){
+					echo "No se reconoce Evento: ".trim($dato[$j]).' ';
 					$guardar = false;
 					break;
 				}
