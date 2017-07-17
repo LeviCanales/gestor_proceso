@@ -125,13 +125,30 @@
 		}
 		echo "</div><div class='cuadro-transparente espacio'><div class='titulillo'>Procesos Aceptados ".sizeof($proceso)."</div><div class='row'>";
 		for ($i=0; $i < sizeof($proceso); $i++) { 
-			echo "<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3' id='borde'><div class='letra' style='font-size: 80px; text-align:center; font-family: 'Basscrw',fantasy;'>".($i+1).':</div>'.$proceso[$i].'</div>';
+			echo "<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4' id='borde'><div class='letra' style='font-size: 80px; text-align:center; font-family: 'Basscrw',fantasy;'>".($i+1).':</div>'.$proceso[$i].'</div>';
 		}
 		echo "</div></div>";
 		fclose($archivo);
 	}else{
-		echo "No se encontro proceso.";
+		echo "</h1><div class='cuadro-transparente espacio'>No se encontro proceso.";
+		?>
+		<form method="post" id="formulario" enctype="multipart/form-data">
+		    <span class="negrito">Subir Proceso:<input type="file" name="file" class="form-control"></span>
+		</form>
+		<div id="respuesta"></div>
+		</div>
+		<?php
 	}
+	?>
+	<div class='cuadro-transparente espacio'>Número de Ciclos:
+		<div class="input-group">
+			<input type="number" min="0" class="form-control">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default negrito">Ejecutar</button>
+			</span>
+		</div>
+	</div>
+	<?php
 ?>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.highlight-5.js"></script>

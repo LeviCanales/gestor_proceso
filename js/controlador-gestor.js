@@ -11,3 +11,20 @@ $grid.on( 'click', '.grid-item', function() {
 });
 $('.grid').highlight('False');
 $('.grid').highlight('Proceso Fallido');
+$(function(){
+        $("input[name='file']").on("change", function(){
+            var formData = new FormData($("#formulario")[0]);
+            var ruta = "ajax-proceso.php";
+            $.ajax({
+                url: ruta,
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(datos)
+                {
+                    location.href ="";
+                }
+            });
+        });
+     });
