@@ -9,6 +9,10 @@
 			unlink('data/procesos.txt');
 			header('Location: index.php');
 	}
+	$detalles = false;
+	if (isset($_POST["btn-detalles"])) {
+			$detalles = true;
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,12 +83,15 @@
 			}
 			//revisa el tamaño adecuado de cada espacio y si es numerico o no.
 			for ($j=0; ($j < sizeof($dato))&&$guardar; $j++) {
-				echo "* ".($j+1).': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
+				if ($detalles) {
+					echo "* ".($j+1).': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
+				}
 				if(!(is_numeric($dato[$j]))){
 					echo "Tipo de Datos: ". gettype($dato[$j]).' ';
 					$guardar = false;
 					break;
 				}
+				//comprobar que los procesos no sean negativos.
 				if(!((integer)$dato[$j]>=0)){
 					echo "Dato Invalido: ". trim($dato[$j]).' ';
 					$guardar = false;
@@ -156,21 +163,41 @@
 				</span>
 			</div>
 		</div>
-		<form class='cuadro-transparente espacio' action="index.php" method="POST" style="text-align: center;">
+		<form class='cuadro-transparente espacio centrar' action="index.php" method="POST">
 			<input type="submit" name="btn-borrar" value="Borrar Proceso" class="btn btn-default negrito">
+			<?php
+			if(!$detalles){
+				echo '<input type="submit" name="btn-detalles" value="Ver Detalles" class="btn btn-default negrito">';
+			}else{
+				echo '<input type="submit" name="btn" value="No Ver Detalles" class="btn btn-default negrito">';
+			}
+			?>
 		</form>
 		<?php
 	}else{
-		echo "</h1><div class='cuadro-transparente espacio'>No se encontro proceso.";
+		//contraseña: tantan
 		?>
-		<form method="post" id="formulario" enctype="multipart/form-data">
-		    <span class="negrito">Subir Proceso:<input type="file" name="file" class="form-control"></span>
-		</form>
+		</h1>
+		<div id="cuadro-contra" class='cuadro-transparente espacio centrar'>Escriba la Contraseña:<br><br>
+			<div class="input-group">
+				<input type="password" id="contra" class="form-control">
+				<span class="input-group-btn">
+					<button type="button" id="btn-contra" class="btn btn-default negrito">Entrar</button>
+				</span>
+			</div>
+			<br><div id="invalido"></div>
+		</div>
+		<div id="subir" class='cuadro-transparente espacio centrar' style="display: none;">No se encontro proceso
+			<form class="centrar" method="post" id="formulario" enctype="multipart/form-data">
+			    Subir Proceso:<input type="file" name="file" class="form-control">
+			</form>
+		</div>
 		<?php
 	}
 ?>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.highlight-5.js"></script>
+<script src="js/jquery.crypt.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>

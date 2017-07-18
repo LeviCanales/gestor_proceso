@@ -29,3 +29,11 @@ $(function(){
             });
         });
      });
+$("#btn-contra").click(function(){
+      if($().crypt({method:"sha1",source:$("#contra").val()})=="fc61330e819610cfccfc8b2fb37678a9ffbd3f4d"){
+      	$("#cuadro-contra").hide();
+      	$("#subir").show();
+      }else{
+      	$("#invalido").html("<span class='highlight'>Contraseña Invalida</span>");
+      }
+});

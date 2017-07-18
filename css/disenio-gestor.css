@@ -32,10 +32,9 @@ h1{
     padding-right: 20px;
   }
   .gigante {
-    font-size: 40px;
-    font-family:'Hanged-Letters', fantasy;
-    font-weight: lighter;
-}
+    font-size: 30px;
+    font-family:'Arual', sans-serif;
+  }
 .titulillo{
   text-align: center;
   font-family: 'Basscrw',fantasy;
@@ -55,4 +54,7 @@ h1{
 }
 .negrito{
   font-weight: bold;
+}
+.centrar{
+  text-align: center;
 }
