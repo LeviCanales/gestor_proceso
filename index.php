@@ -35,22 +35,29 @@
 <h1 style="font-family: 'Children-of-the-Starlight', cursive;">Simulador de Procesos
 <?php
 	$direccion = "data/procesos.txt";
+	//si ya hay un archivo guardado empieza, si no pedira subirlo.
 	if(file_exists($direccion)){
-		$raw = array();
 		$archivo =  fopen($direccion, "r") or die("No se pudo abrir");
+		//$todos contiene todo el archivo de los procesos sin separar ni nada.
 		$todos = fread($archivo, filesize($direccion));
+		//$raw un arreglo con cada proceso crudo separado.
+		$raw = array();
+		//$proceso un arreglo de objetos con los procesos buenos metidos en el.
 		$proceso = array();
 		//echo $todos.'<br>';
 		/*$txt = fopen("data/TXT.txt", "w");
 		fwrite($txt, $todos);
 		fclose($txt);*/
+		//separar los procesos 
 		$raw = explode(";", $todos, -1);
 		echo " Todos: ".sizeof($raw)."</h1><div class='grid'>";
 		for ($i=0; $i < sizeof($raw); $i++) {
 			$guardar = true;
 			echo '<div class="grid-item cuadro-transparente">';
 			echo ($i+1).': '.$raw[$i].'<br>';
+			//separar un proceso en sus espacios.
 			$dato = explode("/", $raw[$i]);
+			//este ciclo busca los Id repetidos.
 			for ($k=0; $k < sizeof($proceso); $k++) { 
 				if (trim($dato[0])==($proceso[$k])->getId_proceso()) {
 					echo "ID Repetido: ". trim($dato[0]).' ';
@@ -58,14 +65,17 @@
 					break;
 				}
 			}
-			if (!(sizeof($dato)==6)) {
+			//este if revisa que el proceso tenga exactamente los 6 espacios.
+			if (!(sizeof($dato)==6)&&$guardar) {
 				echo "Cantidad de Datos: ".sizeof($dato).' ';
 				$guardar = false;
 			}
+			//este if mira de que la instruccion de bloqueo no este despues de las instrucciones totales.
 			if ((((integer)trim($dato[4]))>=((integer)trim($dato[3])))&&$guardar) {
 				echo "Instrucciones ".trim($dato[3]).'<br>no alcanzan a<br>Bloqueo: '.trim($dato[4]).' ';
 				$guardar = false;
 			}
+			//revisa el tamaño adecuado de cada espacio y si es numerico o no.
 			for ($j=0; ($j < sizeof($dato))&&$guardar; $j++) {
 				echo "* ".($j+1).': '.$dato[$j].' is_numeric: '.((is_numeric($dato[$j]))?'True':'False').'| Tamanio: '.strlen(trim($dato[$j])).'<br>';
 				if(!(is_numeric($dato[$j]))){
@@ -114,6 +124,7 @@
 					break;
 				}
 			}
+			//si esta correcto guarda el proceso en el arreglo $proceso[]
 			if ($guardar) {
 				echo '<span class="highlightn">Proceso Adecuado ID: '.trim($dato[0]).'</span>';
 				$proceso[] = new Proceso(trim($dato[0]),trim($dato[1]),trim($dato[2]),trim($dato[3]),trim($dato[4]),trim($dato[5]));

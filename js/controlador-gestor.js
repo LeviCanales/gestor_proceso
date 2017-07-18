@@ -11,6 +11,7 @@ $grid.on( 'click', '.grid-item', function() {
 });
 $('.grid').highlight('False');
 $('.grid').highlight('Proceso Fallido');
+ //Funcion para Subir Archivo.
 $(function(){
         $("input[name='file']").on("change", function(){
             var formData = new FormData($("#formulario")[0]);
