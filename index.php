@@ -85,6 +85,11 @@
 					$guardar = false;
 					break;
 				}
+				if(!((integer)$dato[$j]>=0)){
+					echo "Dato Invalido: ". trim($dato[$j]).' ';
+					$guardar = false;
+					break;
+				}
 				if(($j==0)&&!(strlen(trim($dato[$j]))==4)){
 					echo "Tamaño Id ";
 					$guardar = false;
