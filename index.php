@@ -3,7 +3,12 @@
 	include("class/class-cursor.php");
 	include("class/class-lista.php");
 	include("class/class-proceso.php");
-	$probarMemoria = new Lista();
+	//$probarMemoria = new Lista();
+	//Para usar el proceso indefinidamente hasta que uno lo decide borrar.
+	if (isset($_POST["btn-borrar"])) {
+			unlink('data/procesos.txt');
+			header('Location: index.php');
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,9 +50,6 @@
 		//$proceso un arreglo de objetos con los procesos buenos metidos en el.
 		$proceso = array();
 		//echo $todos.'<br>';
-		/*$txt = fopen("data/TXT.txt", "w");
-		fwrite($txt, $todos);
-		fclose($txt);*/
 		//separar los procesos 
 		$raw = explode(";", $todos, -1);
 		echo " Todos: ".sizeof($raw)."</h1><div class='grid'>";
@@ -140,27 +142,27 @@
 		}
 		echo "</div></div>";
 		fclose($archivo);
-		unlink('data/procesos.txt');
+		?>
+		<div class='cuadro-transparente espacio'>Número de Ciclos:
+			<div class="input-group">
+				<input type="number" min="0" class="form-control">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default negrito">Ejecutar</button>
+				</span>
+			</div>
+		</div>
+		<form class='cuadro-transparente espacio' action="index.php" method="POST" style="text-align: center;">
+			<input type="submit" name="btn-borrar" value="Borrar Proceso" class="btn btn-default negrito">
+		</form>
+		<?php
 	}else{
 		echo "</h1><div class='cuadro-transparente espacio'>No se encontro proceso.";
 		?>
 		<form method="post" id="formulario" enctype="multipart/form-data">
 		    <span class="negrito">Subir Proceso:<input type="file" name="file" class="form-control"></span>
 		</form>
-		<div id="respuesta"></div>
-		</div>
 		<?php
 	}
-	?>
-	<div class='cuadro-transparente espacio'>Número de Ciclos:
-		<div class="input-group">
-			<input type="number" min="0" class="form-control">
-			<span class="input-group-btn">
-				<button type="button" class="btn btn-default negrito">Ejecutar</button>
-			</span>
-		</div>
-	</div>
-	<?php
 ?>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.highlight-5.js"></script>

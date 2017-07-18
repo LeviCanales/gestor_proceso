@@ -1,3 +1,6 @@
+/*$txt = fopen("data/TXT.txt", "w");
+		fwrite($txt, $todos);
+		fclose($txt);*/
 Probar La Lista:
 $probarMemoria->getContenedor()->memoria();
 /*$probarMemoria->memoria();
