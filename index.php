@@ -154,18 +154,29 @@
 		}
 		echo "</div></div>";
 		fclose($archivo);
+		//Empieza el ROLLO DE LOS PROCESOS
+		if (isset($_POST["btn-ejecutar"])&&!empty($_POST["numero_ciclos"])) {
+				$numero_ciclos = $_POST["numero_ciclos"];
+				echo "<div class='cuadro-transparente espacio'>".$numero_ciclos.'<br>';
+				for ($i=0; $i < sizeof($proceso); $i++) { 
+					echo ($i+1).' '.$proceso[$i].'<br>';
+				}
+				echo '</div>';
+			}
 		?>
-		<div class='cuadro-transparente espacio'>Número de Ciclos:
+		<form action="index.php" id="procede" method="POST" class='cuadro-transparente espacio'>Número de Ciclos:
 			<div class="input-group">
-				<input type="number" min="0" class="form-control">
+				<input name="numero_ciclos" type="number" min="0" class="form-control">
 				<span class="input-group-btn">
-					<button type="button" class="btn btn-default negrito">Ejecutar</button>
+					<input type="submit" name="btn-ejecutar" value="Ejecutar" class="btn btn-default negrito">
 				</span>
 			</div>
-		</div>
+		</form>
+		<!--boton de borrar procesos-->
 		<form class='cuadro-transparente espacio centrar' action="index.php" method="POST">
 			<input type="submit" name="btn-borrar" value="Borrar Proceso" class="btn btn-default negrito">
 			<?php
+			//boton de ver detalles de los espacios del proceso.
 			if(!$detalles){
 				echo '<input type="submit" name="btn-detalles" value="Ver Detalles" class="btn btn-default negrito">';
 			}else{
