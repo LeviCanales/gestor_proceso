@@ -61,7 +61,7 @@
 			$guardar = true;
 			echo '<div class="grid-item cuadro-transparente">';
 			echo ($i+1).': '.$raw[$i].'<br>';
-			//separar un proceso en sus espacios.
+			//separar un proceso en sus espacios y guardar en el arreglo dato.
 			$dato = explode("/", $raw[$i]);
 			//este ciclo busca los Id repetidos.
 			for ($k=0; $k < sizeof($proceso); $k++) { 
@@ -149,13 +149,14 @@
 			echo "</div><br>";
 		}
 		echo "</div><div class='cuadro-transparente espacio'><div class='titulillo'>Procesos Aceptados ".sizeof($proceso)."</div><div class='row'>";
+		//Imprime los procesos aceptados.
 		for ($i=0; $i < sizeof($proceso); $i++) { 
 			echo "<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4' id='borde'><div class='letra' style='font-size: 80px; text-align:center; font-family: 'Basscrw',fantasy;'>".($i+1).':</div>'.$proceso[$i].'</div>';
 		}
 		echo "</div></div>";
 		fclose($archivo);
 		//Empieza el ROLLO DE LOS PROCESOS
-		if (isset($_POST["btn-ejecutar"])&&!empty($_POST["numero_ciclos"])) {
+		/*if (isset($_POST["btn-ejecutar"])&&!empty($_POST["numero_ciclos"])) {
 				$numero_ciclos = $_POST["numero_ciclos"];
 				echo "<div class='cuadro-transparente espacio'>".$numero_ciclos.'<br>';
 				for ($i=0; $i < sizeof($proceso); $i++) { 
@@ -163,7 +164,8 @@
 				}
 				echo '</div>';
 			}
-		?>
+		
+		//Definir el numero de ciclos.
 		<form action="index.php" id="procede" method="POST" class='cuadro-transparente espacio'>Número de Ciclos:
 			<div class="input-group">
 				<input name="numero_ciclos" type="number" min="0" class="form-control">
@@ -171,7 +173,24 @@
 					<input type="submit" name="btn-ejecutar" value="Ejecutar" class="btn btn-default negrito">
 				</span>
 			</div>
-		</form>
+		</form>*/
+		//Definir el numero de ciclos AJAX
+		
+		echo '<input type="hidden" id="tamanio_proceso" value="'.sizeof($proceso).'">';
+		for ($i=0; $i < sizeof($proceso); $i++) { 
+			echo '<input type="hidden" id="proceso'.$i.'" value="'.$proceso[$i]->getId_proceso().'/'.$proceso[$i]->getEstado().'/'.$proceso[$i]->getPrioridad().'/'.$proceso[$i]->getCantidad_instruccion().'/'.$proceso[$i]->getIntruccion_bloqueo().'/'.$proceso[$i]->getEvento().'">';
+		}
+		?>
+		<div class='cuadro-transparente espacio'>Número de Ciclos AJAX:
+			<div class="input-group">
+				<input type="number" min="0" class="form-control" id="numero_ciclos">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default negrito" id="ejecutar">Ejecutar</button>
+				</span>
+			</div>
+		</div>
+		<div id="resultado">
+		</div>
 		<!--boton de borrar procesos-->
 		<form class='cuadro-transparente espacio centrar' action="index.php" method="POST">
 			<input type="submit" name="btn-borrar" value="Borrar Proceso" class="btn btn-default negrito">
