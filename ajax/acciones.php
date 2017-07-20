@@ -5,6 +5,7 @@
 	include("../class/class-proceso.php");
 	switch ($_GET["accion"]) {
 		case '1':
+			sleep(2);
 			echo '<div class="cuadro-transparente espacio negrito">'.$_POST['numero_ciclos'];
 			$procesos = array();
 			for ($i=0; $i < $_POST["tamanio_proceso"]; $i++) {

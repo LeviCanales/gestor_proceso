@@ -42,6 +42,7 @@ $("#btn-contra").click(function(){
 //Pasar los procesos por ajax:
 $("#ejecutar").click(function(){
 	$("#iniciar").button("loading");
+	$("#spin").show();
 	if (!($("#numero_ciclos").val().length==0)) {
 		var procesos ="numero_ciclos="+$("#numero_ciclos").val();
 		procesos += "&"+"tamanio_proceso="+$("#tamanio_proceso").val();
@@ -54,6 +55,7 @@ $("#ejecutar").click(function(){
 			data: procesos,
 			method: "POST",
 			success: function(resultado){
+				$("#spin").hide();
 				$("#resultado").html(resultado);
 			},
 			error: function(){

@@ -189,6 +189,7 @@
 				</span>
 			</div>
 		</div>
+		<div class="cuadro-transparente espacio" id="spin" style="display: none;"><canvas id=a style="width: 100%; height: 100%;"></div>
 		<div id="resultado">
 		</div>
 		<!--boton de borrar procesos-->
@@ -225,6 +226,7 @@
 		<?php
 	}
 ?>
+<script src="js/spin.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.highlight-5.js"></script>
 <script src="js/jquery.crypt.js"></script>
