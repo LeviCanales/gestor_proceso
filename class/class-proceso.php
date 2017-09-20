@@ -58,6 +58,9 @@
 		public function setEvento($evento){
 			$this->evento = $evento;
 		}
+		function proceso(){
+			return $this->id_proceso . '/'.$this->estado . '/'.$this->prioridad . '/'.$this->cantidad_instruccion . '/'.$this->intruccion_bloqueo . '/'.$this->evento;
+		}
 		public function __toString(){
 			return 'Id del proceso: ' . $this->id_proceso . '<br>'.
 				" Estado del proceso: " . $this->estado . '<br>'.

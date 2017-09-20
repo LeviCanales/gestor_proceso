@@ -1,7 +1,4 @@
 <?php
-	include("class/class-nodo.php");
-	include("class/class-cursor.php");
-	include("class/class-lista.php");
 	include("class/class-proceso.php");
 	//$probarMemoria = new Lista();
 	//Para usar el proceso indefinidamente hasta que uno lo decide borrar.
@@ -178,12 +175,12 @@
 		
 		echo '<input type="hidden" id="tamanio_proceso" value="'.sizeof($proceso).'">';
 		for ($i=0; $i < sizeof($proceso); $i++) { 
-			echo '<input type="hidden" id="proceso'.$i.'" value="'.$proceso[$i]->getId_proceso().'/'.$proceso[$i]->getEstado().'/'.$proceso[$i]->getPrioridad().'/'.$proceso[$i]->getCantidad_instruccion().'/'.$proceso[$i]->getIntruccion_bloqueo().'/'.$proceso[$i]->getEvento().'">';
+			echo '<input type="hidden" id="proceso'.$i.'" value="'.$proceso[$i]->proceso().'">';
 		}
 		?>
 		<div class='cuadro-transparente espacio'>Número de Ciclos AJAX:
 			<div class="input-group">
-				<input type="number" min="0" class="form-control" id="numero_ciclos">
+				<input type="number" min="1" class="form-control" id="numero_ciclos">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default negrito" id="ejecutar">Ejecutar</button>
 				</span>
@@ -192,8 +189,8 @@
 		<div class="cuadro-transparente espacio" id="spin" style="display: none;"><canvas id=a style="width: 100%; height: 100%;"></div>
 		<div id="resultado">
 		</div>
-		<!--boton de borrar procesos-->
 		<form class='cuadro-transparente espacio centrar' action="index.php" method="POST">
+			<!--boton de borrar procesos-->
 			<input type="submit" name="btn-borrar" value="Borrar Proceso" class="btn btn-default negrito">
 			<?php
 			//boton de ver detalles de los espacios del proceso.
