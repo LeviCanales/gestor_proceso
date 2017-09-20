@@ -18,11 +18,19 @@
 				echo '<br>'.($i+1).': '.$listo->RECUPERA($p+$i)->proceso();
 			}
 			//empezando ordenamiento "burbuja"
-			for ($i=0; $i < ($listo->FIN()-1); $i++) { 
-				echo '<br>'.(($listo->VACIA())?'si':'no').'<br>';
+			for ($i=1; $i < ($listo->FIN()-1); $i++) { 
+				for ($j=0; $j <(($listo->FIN()-1)-$i); $j++) { 
+					if (($listo->RECUPERA($p+$j)->getPrioridad())>($listo->RECUPERA($listo->SIGUIENTE($p+$j))->getPrioridad())) {
+						$listo->INSERTA($listo->RECUPERA($p+$j),$listo->SIGUIENTE($listo->SIGUIENTE($p+$j)));
+						$listo->SUPRIME($p+$j);
+					}
+				}
 			}
-			echo '<br>'.$listo->RECUPERA($listo->PRIMERO())->getId_proceso().'<br>';
-			$listo->getContenedor()->imprimeLista();
+			echo '<br><br>'.'Ordenado por prioridades';
+			//$listo->getContenedor()->imprimeLista();
+			for ($i=0; $i < ($listo->FIN()-1); $i++) { 
+				echo '<br>'.($i+1).': '.$listo->RECUPERA($p+$i)->proceso();
+			}
 			echo '</div>';
 			break;
 		
