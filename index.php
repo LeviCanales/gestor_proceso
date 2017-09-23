@@ -138,7 +138,8 @@
 			//si esta correcto guarda el proceso en el arreglo $proceso[]
 			if ($guardar) {
 				echo '<span class="highlightn">Proceso Adecuado ID: '.trim($dato[0]).'</span>';
-				$proceso[] = new Proceso(trim($dato[0]),trim($dato[1]),trim($dato[2]),trim($dato[3]),trim($dato[4]),trim($dato[5]));
+				//todos los procesos cambiaran a estado nuevo, o sea 0.
+				$proceso[] = new Proceso(trim($dato[0]),0,trim($dato[2]),trim($dato[3]),trim($dato[4]),trim($dato[5]));
 			}else{
 				echo 'Proceso Fallido';
 			}
@@ -172,8 +173,8 @@
 			</div>
 		</form>*/
 		//Definir el numero de ciclos AJAX
-		
 		echo '<input type="hidden" id="tamanio_proceso" value="'.sizeof($proceso).'">';
+		//guardar la información de los procesos para enviarlos por AJAX
 		for ($i=0; $i < sizeof($proceso); $i++) { 
 			echo '<input type="hidden" id="proceso'.$i.'" value="'.$proceso[$i]->proceso().'">';
 		}
@@ -187,8 +188,8 @@
 			</div>
 		</div>
 		<div class="cuadro-transparente espacio" id="spin" style="display: none;"><canvas id=a style="width: 100%; height: 100%;"></div>
-		<div id="resultado">
-		</div>
+			<div id="resultado">
+			</div>
 		<form class='cuadro-transparente espacio centrar' action="index.php" method="POST">
 			<!--boton de borrar procesos-->
 			<input type="submit" name="btn-borrar" value="Borrar Proceso" class="btn btn-default negrito">

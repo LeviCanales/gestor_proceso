@@ -11,7 +11,7 @@
 			$listo = new Lista();
 			$p = $listo->PRIMERO();
 			//Guardar los procesos en la lista de listos.
-			echo '<br>'.'sin arreglo'.'<br>';
+			echo '<br><br>'.'Nuevo';
 			for ($i=0; $i < $_POST["tamanio_proceso"]; $i++) { 
 				$dato = explode("/", $_POST["proceso".$i]);
 				$listo->INSERTA((new Proceso(trim($dato[0]),trim($dato[1]),trim($dato[2]),trim($dato[3]),trim($dato[4]),trim($dato[5]))), ($p+$i));
@@ -26,9 +26,10 @@
 					}
 				}
 			}
-			echo '<br><br>'.'Ordenado por prioridades';
+			echo '<br><br>'.'Listo';
 			//$listo->getContenedor()->imprimeLista();
-			for ($i=0; $i < ($listo->FIN()-1); $i++) { 
+			for ($i=0; $i < ($listo->FIN()-1); $i++) {
+				$listo->RECUPERA($p+$i)->setEstado(1);
 				echo '<br>'.($i+1).': '.$listo->RECUPERA($p+$i)->proceso();
 			}
 			echo '</div>';
