@@ -9,6 +9,10 @@
 		private $intruccion_bloqueo;
 		private $evento;
 
+		//Las que cambiaram em el ciclo.
+		private $num_instruccion;
+		private $num_bloqueo;
+
 		public function __construct($id_proceso,
 					$estado,
 					$prioridad,
@@ -21,6 +25,9 @@
 			$this->cantidad_instruccion = $cantidad_instruccion;
 			$this->intruccion_bloqueo = $intruccion_bloqueo;
 			$this->evento = $evento;
+
+			$this->num_instruccion = 0;
+			$this->num_bloqueo = 0;
 		}
 		public function getId_proceso(){
 			return $this->id_proceso;
@@ -58,6 +65,20 @@
 		public function setEvento($evento){
 			$this->evento = $evento;
 		}
+
+		public function getNum_instruccion(){
+			return $this->num_instruccion;
+		}
+		public function setNum_instruccion($num_instruccion){
+			$this->num_instruccion = $num_instruccion;
+		}
+		public function getNum_bloqueo(){
+			return $this->num_bloqueo;
+		}
+		public function setNum_bloqueo($num_bloqueo){
+			$this->num_bloqueo = $num_bloqueo;
+		}
+		
 		function proceso(){
 			return $this->id_proceso . '/'.$this->estado . '/'.$this->prioridad . '/'.$this->cantidad_instruccion . '/'.$this->intruccion_bloqueo . '/'.$this->evento;
 		}
