@@ -82,6 +82,28 @@
 		function proceso(){
 			return $this->id_proceso . '/'.$this->estado . '/'.$this->prioridad . '/'.$this->cantidad_instruccion . '/'.$this->intruccion_bloqueo . '/'.$this->evento;
 		}
+		function estado(){
+			$estado = '';
+			switch ($this->estado) {
+				case '0':
+					$estado .= 'Nuevo';
+					break;
+				case '1':
+					$estado .= 'Listos';
+					break;
+				case '2':
+					$estado .= 'Ejecutando';
+					break;
+				case '3':
+					$estado .= 'Bloqueado';
+					break;
+				case '4':
+					$estado .= 'Saliente';
+					break;
+			}
+			$estado .= '. Prioridad: '.$this->prioridad.'. Inst: '.$this->num_instruccion;
+			return $estado;
+		}
 		public function __toString(){
 			return 'Id del proceso: ' . $this->id_proceso . '<br>'.
 				" Estado del proceso: " . $this->estado . '<br>'.
