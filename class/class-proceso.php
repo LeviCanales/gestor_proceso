@@ -78,7 +78,7 @@
 		public function setNum_bloqueo($num_bloqueo){
 			$this->num_bloqueo = $num_bloqueo;
 		}
-		
+		//imprimir de forma ordenada el proceso.
 		function proceso(){
 			return $this->id_proceso . '/'.$this->estado . '/'.$this->prioridad . '/'.$this->cantidad_instruccion . '/'.$this->intruccion_bloqueo . '/'.$this->evento;
 		}
@@ -98,7 +98,7 @@
 					$estado .= 'Blo: '.$this->num_bloqueo.'. Inst: '.$this->num_instruccion;
 					break;
 				case '4':
-					$estado .= 'Saliente';
+					$estado .= 'Saliente'.' Blo: '.$this->num_bloqueo.'. Inst: '.$this->num_instruccion;
 					break;
 			}
 			/*$estado .= '. Prior: '.$this->prioridad.'. Inst: '.$this->num_instruccion.'. Blo: '.$this->num_bloqueo;*/

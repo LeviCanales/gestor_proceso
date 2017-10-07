@@ -12,6 +12,8 @@
 			$p = $listo->PRIMERO();
 			$bloqueado = new Lista();
 			$pb = $bloqueado->PRIMERO();
+			$saliente = new Lista();
+			$ps = $saliente->PRIMERO();
 			//Guardar los procesos en la lista de listos.
 			echo '<br><br>'.'Nuevo';
 			for ($i=0; $i < $_POST["tamanio_proceso"]; $i++) { 
@@ -36,7 +38,7 @@
 			$contadorCinco = 0;
 			$contadorSegmento = 1;
 			$seBloqueo = false;
-			$terminoBloqueo = false;
+			$seTermino = false;
 			echo '<div class="row">';
 			for ($i=0; $i < $_POST["numero_ciclos"]; $i++) {
 				//Ver si se repite el proceso elegido seguidamente
@@ -62,28 +64,37 @@
 					}
 				}
 				//Segmento de 5 ciclos
+			if (!$listo->VACIA()) {
 				if (($contadorCinco<5)&&!$seBloqueo) {
 					$listo->RECUPERA($p)->setEstado(2);
 					$listo->RECUPERA($p)->setNum_instruccion(1+($listo->RECUPERA($p)->getNum_instruccion()));
+					//Ver si se bloquea.
 					if (($listo->RECUPERA($p)->getNum_instruccion())==($listo->RECUPERA($p)->getIntruccion_bloqueo())) {
 						$seBloqueo = true;
+					}
+					//Ver si termina
+					if (($listo->RECUPERA($p)->getNum_instruccion())==($listo->RECUPERA($p)->getCantidad_instruccion())) {
+						$seTermino = true;
 					}
 					$buscarProceso = false;
 					$contadorCinco++;
 				}
+			}
 				if (!(($contadorCinco<5)&&!$seBloqueo)) {
 					$buscarProceso = true;
 					$contadorCinco = 0;
 				}
-				//bloqueo
+				//meter en el tda de bloqueo
 				if ($seBloqueo) {
 					$listo->RECUPERA($p)->setEstado(3);
 					$bloqueado->INSERTA($listo->RECUPERA($p),$pb);
 					$listo->SUPRIME($p);
 					$seBloqueo = false;
 				}
+				//Sumar una instruccion de bloqueo, a todos los bloqueos en cada ciclo.
 				if (($bloqueado->FIN())!=$bloqueado->PRIMERO()) {
 					for ($b=0; $b < ($bloqueado->FIN()-1); $b++) {
+						//Ver si ya cumplio su evento de bloqueo.
 						if (($bloqueado->RECUPERA($pb+$b)->getNum_bloqueo())==$bloqueado->RECUPERA($pb+$b)->evento()) {
 							$bloqueado->RECUPERA($pb+$b)->setEstado(1);
 							$listo->INSERTA($bloqueado->RECUPERA($pb+$b),$listo->FIN());
@@ -93,13 +104,25 @@
 						}
 					}
 				}
-				echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="borde">Segmento: '.$contadorSegmento.'<br>Ciclo: '.($i+1).': Repetido: '.$contadorTres.'. ID:'.$listo->RECUPERA($p)->getId_proceso();
+				//Meter en el TDA de terminado.
+				if ($seTermino) {
+					$listo->RECUPERA($p)->setEstado(4);
+					$saliente->INSERTA($listo->RECUPERA($p),$ps);
+					$listo->SUPRIME($p);
+					$seTermino = false;
+				}
+				
+				echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="borde">Segmento: '.$contadorSegmento.'<br>Ciclo: '.($i+1).': Repetido: '.$contadorTres.((!$listo->VACIA())?('. ID:'.$listo->RECUPERA($p)->getId_proceso()):(''));
+				
 				//Solo para ver los cambios en las prioridades.
 				for ($z=0; $z < ($listo->FIN()-1); $z++) {
 					echo '<br>&nbsp&nbsp'.($z+1).': '.$listo->RECUPERA($p+$z)->proceso().'<br>&nbsp&nbsp&nbsp'.$listo->RECUPERA($p+$z)->estado();
 				}
 				for ($z=0; $z < ($bloqueado->FIN()-1); $z++) {
 					echo '<br>&nbsp&nbsp'.($z+1).': '.$bloqueado->RECUPERA($pb+$z)->proceso().'<br>&nbsp&nbsp&nbsp'.$bloqueado->RECUPERA($pb+$z)->estado();
+				}
+				for ($z=0; $z < ($saliente->FIN()-1); $z++) {
+					echo '<br>&nbsp&nbsp'.($z+1).': '.$saliente->RECUPERA($ps+$z)->proceso().'<br>&nbsp&nbsp&nbsp'.$saliente->RECUPERA($ps+$z)->estado();
 				}
 				echo '</div>';
 				if ($buscarProceso) {
