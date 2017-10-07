@@ -89,20 +89,27 @@
 					$estado .= 'Nuevo';
 					break;
 				case '1':
-					$estado .= 'Listos';
+					$estado .= 'Listos'.'. Prior: '.$this->prioridad.'. Inst: '.$this->num_instruccion;
 					break;
 				case '2':
-					$estado .= 'Ejecutando';
+					$estado .= 'Ejecutando'.'. Inst: '.$this->num_instruccion;
 					break;
 				case '3':
-					$estado .= 'Bloqueado';
+					$estado .= 'Blo: '.$this->num_bloqueo.'. Inst: '.$this->num_instruccion;
 					break;
 				case '4':
 					$estado .= 'Saliente';
 					break;
 			}
-			$estado .= '. Prioridad: '.$this->prioridad.'. Inst: '.$this->num_instruccion;
+			/*$estado .= '. Prior: '.$this->prioridad.'. Inst: '.$this->num_instruccion.'. Blo: '.$this->num_bloqueo;*/
 			return $estado;
+		}
+		function evento(){
+			if ($this->evento == 3) {
+				return 13;
+			}else{
+				return 27;
+			}
 		}
 		public function __toString(){
 			return 'Id del proceso: ' . $this->id_proceso . '<br>'.
