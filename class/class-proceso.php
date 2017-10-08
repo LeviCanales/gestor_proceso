@@ -89,16 +89,16 @@
 					$estado .= 'Nuevo';
 					break;
 				case '1':
-					$estado .= 'Listos'.'. Prior: '.$this->prioridad.'. Inst: '.$this->num_instruccion;
+					$estado .= 'Listos';
 					break;
 				case '2':
-					$estado .= 'Ejecutando'.'. Inst: '.$this->num_instruccion;
+					$estado .= 'Ejecutando';
 					break;
 				case '3':
-					$estado .= 'Blo: '.$this->num_bloqueo.'. Inst: '.$this->num_instruccion;
+					$estado .= 'Bloqueado';
 					break;
 				case '4':
-					$estado .= 'Saliente'.' Blo: '.$this->num_bloqueo.'. Inst: '.$this->num_instruccion;
+					$estado .= 'Saliente';
 					break;
 			}
 			/*$estado .= '. Prior: '.$this->prioridad.'. Inst: '.$this->num_instruccion.'. Blo: '.$this->num_bloqueo;*/
