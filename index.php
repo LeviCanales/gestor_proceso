@@ -179,7 +179,7 @@
 			echo '<input type="hidden" id="proceso'.$i.'" value="'.$proceso[$i]->proceso().'">';
 		}
 		?>
-		<div class='cuadro-transparente espacio'>Número de Ciclos AJAX:
+		<div class='cuadro-transparente espacio' id="poner">Número de Ciclos AJAX:
 			<div class="input-group">
 				<input type="number" min="1" class="form-control" id="numero_ciclos">
 				<span class="input-group-btn">

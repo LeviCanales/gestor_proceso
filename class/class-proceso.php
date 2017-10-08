@@ -12,6 +12,7 @@
 		//Las que cambiaram em el ciclo.
 		private $num_instruccion;
 		private $num_bloqueo;
+		private $primer_bloqueo;
 
 		public function __construct($id_proceso,
 					$estado,
@@ -28,6 +29,7 @@
 
 			$this->num_instruccion = 0;
 			$this->num_bloqueo = 0;
+			$this->primer_bloqueo = true;
 		}
 		public function getId_proceso(){
 			return $this->id_proceso;
@@ -77,6 +79,12 @@
 		}
 		public function setNum_bloqueo($num_bloqueo){
 			$this->num_bloqueo = $num_bloqueo;
+		}
+		public function getPrimer_bloqueo(){
+			return $this->primer_bloqueo;
+		}
+		public function setPrimer_bloqueo($primer_bloqueo){
+			$this->primer_bloqueo = $primer_bloqueo;
 		}
 		//imprimir de forma ordenada el proceso.
 		function proceso(){

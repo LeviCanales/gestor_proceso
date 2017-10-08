@@ -6,7 +6,8 @@
 	switch ($_GET["accion"]) {
 		case '1':
 			//sleep(2);
-			echo '<div class="cuadro-transparente espacio negrito"> Número de Ciclos: '.$_POST['numero_ciclos'];
+			echo '<div class="cuadro-transparente espacio negrito"><div class="text-center">Número de Ciclos: '.$_POST['numero_ciclos'];
+			echo '&nbsp&nbsp&nbsp<a class="btn btn-default negrito" href="#final">Ir al Final</a></div>';
 			//Empieza el ROLLO DE LOS PROCESOS AJAX...
 			$listo = new Lista();
 			$p = $listo->PRIMERO();
@@ -95,7 +96,7 @@
 					$seBloqueo = false;
 				}
 				//Sumar una instruccion de bloqueo, a todos los bloqueos en cada ciclo.
-				if (($bloqueado->FIN())!=$bloqueado->PRIMERO()) {
+				if (!$bloqueado->VACIA()) {
 					for ($b=0; $b < ($bloqueado->FIN()-1); $b++) {
 						//Ver si ya cumplio su evento de bloqueo.
 						if (($bloqueado->RECUPERA($pb+$b)->getNum_bloqueo())==$bloqueado->RECUPERA($pb+$b)->evento()) {
@@ -103,7 +104,11 @@
 							$listo->INSERTA($bloqueado->RECUPERA($pb+$b),$listo->FIN());
 							$bloqueado->SUPRIME($pb+$b);
 						}else{
-							$bloqueado->RECUPERA($pb+$b)->setNum_bloqueo(1+($bloqueado->RECUPERA($pb+$b)->getNum_bloqueo()));
+							if (($bloqueado->RECUPERA($pb+$b)->getPrimer_bloqueo())) {
+								$bloqueado->RECUPERA($pb+$b)->setPrimer_bloqueo(false);
+							}else{
+								$bloqueado->RECUPERA($pb+$b)->setNum_bloqueo(1+($bloqueado->RECUPERA($pb+$b)->getNum_bloqueo()));
+							}
 						}
 					}
 				}
@@ -181,6 +186,8 @@
 					$contadorSegmento++;
 				}
 			}
+			echo
+				'<div id="final"></div><div class="text-center"><a class="btn btn-default negrito" href="#poner">Poner Número de ciclos</a></div>';
 			echo '</div></div>';
 			break;
 		
