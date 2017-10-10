@@ -41,7 +41,7 @@
 			$seTermino = false;
 			$idSeleccionado = '';
 			$contadorCarousel = 0;
-			echo '<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">';
+			echo '<div id="carousel-example-generic" class="carousel" data-ride="carousel">';
 			echo '<div class="carousel-inner" role="listbox">';
 			//echo '<div class="row">';
 			for ($i=0; $i < $_POST["numero_ciclos"]; $i++) {
