@@ -41,8 +41,11 @@
 			$seBloqueo = false;
 			$seTermino = false;
 			$idSeleccionado = '';
-			echo '<div class="row">';
+			echo '<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">';
+			echo '<div class="carousel-inner" role="listbox">';
+			//echo '<div class="row">';
 			for ($i=0; $i < $_POST["numero_ciclos"]; $i++) {
+				echo '<div class="'.(($i==0)?'item active':'item').'">';
 				//Ver si se repite el proceso elegido seguidamente
 				if ($buscarProceso&&!$listo->VACIA()) {
 					if ($seRepite == $listo->RECUPERA($p)->getId_proceso()) {
@@ -184,10 +187,29 @@
 					}
 					$contadorSegmento++;
 				}
+				echo '<div class="carousel-caption"></div>';
+				//Fin de item
+				echo "</div>";
 			}
+			//fin Listbox
+			echo '</div>';
 			echo
 				'<div id="final"></div><div class="text-center"><a class="btn btn-default negrito" href="#poner">Poner Número de ciclos</a></div>';
-			echo '</div></div>';
+			//Controles
+			echo '<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>';
+			//fin del carousel
+			echo '</div>';
+			//Fin del row.
+			//echo '</div>';
+			//Fin del cuadro transparente.
+			echo '</div>';
 			break;
 		
 		default:
