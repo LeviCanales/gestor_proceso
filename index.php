@@ -184,6 +184,7 @@
 				<input type="number" min="1" class="form-control" id="numero_ciclos">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default negrito" id="ejecutar">Ejecutar</button>
+					<button type="button" class="btn btn-default negrito" id="ejecutar_c">Carousel</button>
 				</span>
 			</div>
 		</div>

@@ -65,3 +65,29 @@ $("#ejecutar").click(function(){
 	}
 	$("#iniciar").button("reset");
 });
+//Para usar la vista carousel:
+$("#ejecutar_c").click(function(){
+  $("#iniciar").button("loading");
+  $("#spin").show();
+  if (!($("#numero_ciclos").val().length==0)) {
+    var procesos ="numero_ciclos="+$("#numero_ciclos").val();
+    procesos += "&"+"tamanio_proceso="+$("#tamanio_proceso").val();
+    for (var i = 0; i < Number($("#tamanio_proceso").val()); i++) {
+      procesos +=  "&" +"proceso"+i+"="+$("#proceso"+i).val();
+    }
+    //alert(procesos);
+    $.ajax({
+      url:"ajax/acciones_c.php?accion=1",
+      data: procesos,
+      method: "POST",
+      success: function(resultado){
+        $("#spin").hide();
+        $("#resultado").html(resultado);
+      },
+      error: function(){
+        alert("No dio");
+      }
+    });
+  }
+  $("#iniciar").button("reset");
+});
