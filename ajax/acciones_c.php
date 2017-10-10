@@ -6,8 +6,7 @@
 	switch ($_GET["accion"]) {
 		case '1':
 			//sleep(2);
-			echo '<div class="cuadro-transparente espacio negrito"><div class="text-center">Número de Ciclos: '.$_POST['numero_ciclos'];
-			echo '&nbsp&nbsp&nbsp<a class="btn btn-default negrito" href="#final">Ir al Final</a></div>';
+			echo '<div class="cuadro-transparente espacio negrito"><div class="text-center">Número de Ciclos: '.$_POST['numero_ciclos'].'</div>';
 			//Empieza el ROLLO DE LOS PROCESOS AJAX...
 			$listo = new Lista();
 			$p = $listo->PRIMERO();
@@ -41,10 +40,12 @@
 			$seBloqueo = false;
 			$seTermino = false;
 			$idSeleccionado = '';
+			$contadorCarousel = 0;
 			echo '<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">';
 			echo '<div class="carousel-inner" role="listbox">';
 			//echo '<div class="row">';
 			for ($i=0; $i < $_POST["numero_ciclos"]; $i++) {
+				$contadorCarousel++;
 				echo '<div class="'.(($i==0)?'item active':'item').'">';
 				//Ver si se repite el proceso elegido seguidamente
 				if ($buscarProceso&&!$listo->VACIA()) {
@@ -124,7 +125,7 @@
 				
 				echo '<table class="table">
 				<tr>
-					<th colspan="4">Ciclo: '.($i+1).'.	Segmento: '.$contadorSegmento.'.	Segmento Seguido: '.($contadorTres+1).'.	ID Seleccionado: '.$idSeleccionado.'</th>
+					<th colspan="5">Ciclo: '.($i+1).'.	Segmento: '.$contadorSegmento.'.	Segmento Seguido: '.($contadorTres+1).'.	ID Seleccionado: '.$idSeleccionado.'</th>
 				</tr>
 				<tr>
 					<th>Proceso</th>
@@ -164,7 +165,7 @@
 						<td>'.$saliente->RECUPERA($ps+$z)->getNum_bloqueo().'</td>
 					<tr>';
 				}echo "</table>";
-				/*echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="borde">Segmento: '.$contadorSegmento.'<br>Ciclo: '.($i+1).': Repetido: '.$contadorTres.((!$listo->VACIA())?('. ID:'.$listo->RECUPERA($p)->getId_proceso()):(''));
+				/*echo '<div<br> class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="borde">Segmento: '.$contadorSegmento.'<br>Ciclo: '.($i+1).': Repetido: '.$contadorTres.((!$listo->VACIA())?('. ID:'.$listo->RECUPERA($p)->getId_proceso()):(''));
 				//Solo para ver los cambios en las prioridades.
 				for ($z=0; $z < ($listo->FIN()-1); $z++) {
 					echo '<br>&nbsp&nbsp'.($z+1).': '.$listo->RECUPERA($p+$z)->proceso().'<br>&nbsp&nbsp&nbsp'.$listo->RECUPERA($p+$z)->estado();
@@ -181,6 +182,7 @@
 					echo "<br>Termino antes...";
 					$i = $_POST["numero_ciclos"];
 				}
+				echo '<br><br><br><br><br><br>';
 				if ($buscarProceso) {
 					if (!$listo->VACIA()) {
 						$listo->RECUPERA($p)->setEstado(1);
@@ -192,11 +194,12 @@
 				echo "</div>";
 			}
 			//fin Listbox
-			echo '</div>';
-			echo
-				'<div id="final"></div><div class="text-center"><a class="btn btn-default negrito" href="#poner">Poner Número de ciclos</a></div>';
+			echo '</div><ol class="carousel-indicators">';
+			for ($c=0; $c < $contadorCarousel; $c++) { 
+				echo '<li data-target="#carousel-example-generic" data-slide-to="'.$c.'" '.(($c==0)?'class="active"':'item').'></li>';
+			}
 			//Controles
-			echo '<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			echo '</ol><a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 					<span class="sr-only">Previous</span>
 				</a>
