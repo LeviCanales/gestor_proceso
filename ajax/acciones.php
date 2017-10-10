@@ -44,7 +44,7 @@
 			echo '<div class="row">';
 			for ($i=0; $i < $_POST["numero_ciclos"]; $i++) {
 				//Ver si se repite el proceso elegido seguidamente
-				if ($buscarProceso) {
+				if ($buscarProceso&&!$listo->VACIA()) {
 					if ($seRepite == $listo->RECUPERA($p)->getId_proceso()) {
 						$contadorTres++;
 					}else{
@@ -98,18 +98,17 @@
 				//Sumar una instruccion de bloqueo, a todos los bloqueos en cada ciclo.
 				if (!$bloqueado->VACIA()) {
 					for ($b=0; $b < ($bloqueado->FIN()-1); $b++) {
+						if (($bloqueado->RECUPERA($pb+$b)->getPrimer_bloqueo())) {
+								$bloqueado->RECUPERA($pb+$b)->setPrimer_bloqueo(false);
+						}else{
+							$bloqueado->RECUPERA($pb+$b)->setNum_bloqueo(1+($bloqueado->RECUPERA($pb+$b)->getNum_bloqueo()));
+						}
 						//Ver si ya cumplio su evento de bloqueo.
 						if (($bloqueado->RECUPERA($pb+$b)->getNum_bloqueo())==$bloqueado->RECUPERA($pb+$b)->evento()) {
 							$bloqueado->RECUPERA($pb+$b)->setEstado(1);
 							$listo->INSERTA($bloqueado->RECUPERA($pb+$b),$listo->FIN());
 							$bloqueado->SUPRIME($pb+$b);
-						}else{
-							if (($bloqueado->RECUPERA($pb+$b)->getPrimer_bloqueo())) {
-								$bloqueado->RECUPERA($pb+$b)->setPrimer_bloqueo(false);
-							}else{
-								$bloqueado->RECUPERA($pb+$b)->setNum_bloqueo(1+($bloqueado->RECUPERA($pb+$b)->getNum_bloqueo()));
-							}
-						}
+						}						
 					}
 				}
 				//Meter en el TDA de terminado.
